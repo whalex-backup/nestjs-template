@@ -32,7 +32,7 @@ export class TypeOrmConfig {
     loggerOption?: TypeOrmLoggerOptions;
   }): Promise<TypeOrmModuleOptions> {
     const dbConfigs = configService.get<DbConfig>('dbConfigs');
-    const isLocalhost = !dbConfigs?.localhost;
+    const isLocalhost = !!dbConfigs?.localhost;
     const fiveSeconds = 1000 * 5;
 
     const defaultConfig = {
@@ -47,7 +47,7 @@ export class TypeOrmConfig {
 
     let connection: DbConfig | DbConnection;
 
-    if (isLocalhost) {
+    if (!isLocalhost) {
       if (key) connection = dbConfigs[key];
       else connection = dbConfigs;
     } else {
