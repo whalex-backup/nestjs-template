@@ -10,11 +10,11 @@ import { EventEmitter2 } from '@nestjs/event-emitter';
 import { Logger } from '@nestjs/common';
 import { RequestContextService } from '@common/application/context/app.request.context';
 import { Repository } from 'typeorm';
-import { Entites } from '@common/entities';
+import { Entities } from '@common/entities';
 
 export abstract class SqlRepositoryBase<
   Aggregate extends AggregateRoot<any>,
-  DbEntity extends Entites,
+  DbEntity extends Entities,
 > implements RepositoryPort<Aggregate>
 {
   protected constructor(
