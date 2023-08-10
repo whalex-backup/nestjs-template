@@ -13,15 +13,15 @@ import {
 const config = {
   awsRedisSecretId: process.env.AWS_COMMON_SECRETS_ID,
   listenPort: Number(process.env.LISTEN_PORT || '0'),
-  requestId: process.env.REQUEST_ID as string,
-  stage: process.env.STAGE as string,
+  requestId: process.env.REQUEST_ID,
+  stage: process.env.STAGE,
   apiKeys: null,
   web3Keys: null,
 };
 
-export const loadSsmConfig = async (param) => {
-  if (param) {
-    const ssmKeys = await loadParameter(param);
+export const loadSsmConfig = async (ssmKey: string) => {
+  if (ssmKey) {
+    const ssmKeys = await loadParameter(ssmKey);
     config.web3Keys = ssmKeys;
   } else {
     config.web3Keys = {
@@ -30,7 +30,7 @@ export const loadSsmConfig = async (param) => {
   }
 };
 
-export const loadApiKeyConfig = async (secretId) => {
+export const loadApiKeyConfig = async (secretId: string) => {
   if (secretId) {
     const client = new SecretsManagerClient({
       region: process.env.AWS_REGION || 'ap-northeast-2',

@@ -3,6 +3,7 @@ import {
   SecretsManagerClient,
 } from '@aws-sdk/client-secrets-manager';
 import { defaultProvider } from '@aws-sdk/credential-provider-node';
+import { RedisOptions } from '@src/common/types';
 import { plainToInstance } from 'class-transformer';
 import { DbConfig } from '../db.config/db.config';
 import { RedisConfig } from '../redis.configure/redis.config';
@@ -25,23 +26,9 @@ const loadSecretManager = async (secretId: string) => {
   return JSON.parse(payload.SecretString);
 };
 
-export const loadConfig = async (secretId: string) => {
+const loadMysql = (secretId: string, config) => {
   if (secretId) {
-    const config = await loadSecretManager(secretId);
-    const redisInfo = config.redis.pool;
-
-    const redis: any = {
-      username: redisInfo?.username,
-      password: redisInfo?.password,
-      engine: redisInfo.engine,
-      host: redisInfo.host,
-      reader: redisInfo.reader,
-      port: redisInfo.port,
-      cluster: redisInfo.cluster,
-    };
-
     dbConfig = plainToInstance(DbConfig, config.databases);
-    redisConfig = plainToInstance(RedisConfig, redis);
   } else {
     dbConfig = {
       localhost: {
@@ -52,12 +39,41 @@ export const loadConfig = async (secretId: string) => {
         database: 'defi',
       },
     };
+  }
+};
 
+const loadRedis = (secretId: string, config) => {
+  if (secretId) {
+    const redisInfo = config.redis.pool;
+
+    const redis: RedisOptions = {
+      username: redisInfo?.username,
+      password: redisInfo?.password,
+      engine: redisInfo.engine,
+      host: redisInfo.host,
+      reader: redisInfo.reader,
+      port: redisInfo.port,
+      cluster: redisInfo.cluster,
+    };
+
+    redisConfig = plainToInstance(RedisConfig, redis);
+  } else {
     redisConfig = {
       host: 'localhost',
       port: 6379,
     };
   }
+};
+
+export const loadSecretConfig = async (secretId: string) => {
+  let config;
+
+  if (secretId) {
+    config = await loadSecretManager(secretId);
+  }
+
+  loadRedis(secretId, config);
+  loadMysql(secretId, config);
 };
 
 export const getDbConfig = () => {

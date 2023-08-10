@@ -11,9 +11,7 @@ import { RedisMqs } from '../../consts/redis.mqs';
 import * as Types from '../../types';
 import { RedisOptionConfig } from './redis.mq.config';
 
-// noinspection JSUnusedGlobalSymbols
 export default class RedisClientConfig {
-  // noinspection DuplicatedCode
   static getConfig(
     configService: ConfigService,
     key: string,

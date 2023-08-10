@@ -3,7 +3,6 @@ import { Transport, RedisOptions } from '@nestjs/microservices';
 import * as Types from '../../types';
 import { RedisOptionConfig } from './redis.mq.config';
 
-// noinspection JSUnusedGlobalSymbols
 export default class RedisServerConfig {
   // noinspection DuplicatedCode
   static getConfig(
