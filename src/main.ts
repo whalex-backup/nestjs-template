@@ -3,10 +3,7 @@ import { AppModule } from './app.module';
 import { defiSwapRedisServerConfig } from './common/configs/redis.configure/redis.mq.server.config';
 import { ConfigService } from '@nestjs/config';
 import { loadSecretConfig } from './common/configs/secret.manager.configure/secret.manager.config';
-import {
-  loadApiKeyConfig,
-  loadSsmConfig,
-} from './common/configs/default.configure/default.config';
+import { loadSsmConfig } from './common/configs/default.configure/default.config';
 
 async function bootstrap() {
   /**
