@@ -42,6 +42,7 @@
     "esbuild-node-externals": "^1.6.0",
     "esbuild-plugin-decorator": "^0.4.0",
     "esbuild-plugin-node-externals": "^1.0.1",
+    "mysql2": "^3.6.0",
     "nestjs-request-context": "^3.0.0",
     "npm": "^9.8.1",
     "oxide.ts": "^1.0.5",
