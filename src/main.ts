@@ -9,8 +9,14 @@ import {
 } from './common/configs/default.configure/default.config';
 
 async function bootstrap() {
-  // descriptioN
+  /**
+   * Redis connection
+   * Mysql connection
+   */
   await loadSecretConfig(process.env.AWS_COMMON_SECRETS_ID);
+  /**
+   * Web3 connection
+   */
   await loadSsmConfig(process.env.AWS_DEFI_SSM_ID);
 
   const app = await NestFactory.create(AppModule);
