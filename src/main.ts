@@ -22,6 +22,6 @@ async function bootstrap() {
 
   app.connectMicroservice(redisOptions);
 
-  await app.listen(8080);
+  await app.listen(3000);
 }
 bootstrap();

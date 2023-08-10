@@ -3,20 +3,12 @@ import {
   GetSecretValueCommand,
 } from '@aws-sdk/client-secrets-manager';
 import { defaultProvider } from '@aws-sdk/credential-provider-node';
+import { EnvironmentVariable } from '@src/common/types/environment.variable.options';
 import { loadParameter } from '@src/common/utils';
-import { DbConfig } from '../db.config/db.config';
 import {
   getDbConfig,
   getRedisConfig,
 } from '../secret.manager.configure/secret.manager.config';
-
-interface EnvironmentVariable {
-  awsRedisSecretId?: string;
-  awsDbSecretId?: string;
-  dbConfigs?: DbConfig;
-  listenPort: number;
-  stage: string;
-}
 
 const config = {
   awsRedisSecretId: process.env.AWS_COMMON_SECRETS_ID,
