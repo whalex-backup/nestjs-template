@@ -6,6 +6,8 @@ import { ExceptionInterceptor } from './common/application/interceptors/exceptio
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import { ConfigModule } from '@nestjs/config';
 import defaultConfig from './common/configs/default.configure/default.config';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { TypeOrmConfigAsync } from './common/configs/typeorm.configure/typeorm.config.async';
 
 const interceptors: Provider[] = [
   {
@@ -22,6 +24,7 @@ const interceptors: Provider[] = [
   imports: [
     EventEmitterModule,
     CqrsModule,
+    TypeOrmModule.forRootAsync({ ...TypeOrmConfigAsync() }),
     ConfigModule.forRoot({
       isGlobal: true,
       load: [defaultConfig],

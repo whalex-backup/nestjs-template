@@ -9,10 +9,8 @@ import { Option } from 'oxide.ts';
 import { EventEmitter2 } from '@nestjs/event-emitter';
 import { Logger } from '@nestjs/common';
 import { RequestContextService } from '@common/application/context/app.request.context';
-import { BaseEntity, Repository } from 'typeorm';
-import { User } from '@common/entities/User';
-
-type Entities = User;
+import { Repository } from 'typeorm';
+import { Entities } from '@common/entities';
 
 export abstract class SqlRepositoryBase<
   Aggregate extends AggregateRoot<any>,
