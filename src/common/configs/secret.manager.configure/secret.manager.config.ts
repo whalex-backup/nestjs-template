@@ -25,7 +25,7 @@ const loadSecretManager = async (secretId: string) => {
   return JSON.parse(payload.SecretString);
 };
 
-export const loadConfig = async (secretId) => {
+export const loadConfig = async (secretId: string) => {
   if (secretId) {
     const config = await loadSecretManager(secretId);
     const redisInfo = config.redis.pool;

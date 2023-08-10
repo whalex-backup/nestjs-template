@@ -21,14 +21,6 @@ export default class RedisClientConfig {
   ): RedisOptions {
     const redisMqs = configService.get<RedisOptionConfig>('redisConfigs');
 
-    // // temporary
-    // const redisMqs = {
-    //   defiSwap: {
-    //     host: 'localhost',
-    //     port: 6379,
-    //   },
-    // };
-
     if (!redisMqs) {
       throw new Error(`redisMqs 을 찾을 수 없습니다`);
     }
