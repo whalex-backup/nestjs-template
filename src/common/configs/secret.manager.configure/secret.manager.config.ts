@@ -29,6 +29,7 @@ const loadSecretManager = async (secretId: string) => {
 const loadMysql = (secretId: string, config) => {
   if (secretId) {
     dbConfig = plainToInstance(DbConfig, config.databases);
+    console.log(dbConfig);
   } else {
     dbConfig = {
       localhost: {
