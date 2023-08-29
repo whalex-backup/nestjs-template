@@ -2,9 +2,12 @@ import { ConfigService } from '@nestjs/config';
 import { Transport, RmqOptions } from '@nestjs/microservices';
 import { RabbitMqConfig } from './rabbit.mq.config';
 import * as Types from '@src/common/types';
+import { Logger } from '@nestjs/common';
 
 // noinspection JSUnusedGlobalSymbols
 export default class RabbitMqServerConfig {
+  private static logger: Logger = new Logger('RabbitMqServerConfig');
+
   // noinspection DuplicatedCode
   static getConfig(
     configService: ConfigService,
@@ -13,10 +16,16 @@ export default class RabbitMqServerConfig {
     options?: Types.RmqOptions,
   ): RmqOptions {
     const rabbitMqs = configService.get<RabbitMqConfig>('rabbitMqs') ?? {};
-    const connection = rabbitMqs[key];
+    let connection = rabbitMqs[key];
 
     if (!connection) {
-      throw new Error(`${key}를 찾을 수 없습니다`);
+      this.logger.error(`RabbitMqServerConfig: ${key}를 찾을 수 없습니다`);
+      connection = {
+        urls: [
+          'amqps://defi-ledger-swap:Yj-8@i@CNnA!ytcHVD!a@common-mq.dev-test.gdac.com:5671/defi',
+        ],
+        queueName: 'LEDGER_SWAP',
+      };
     }
 
     if (!suffix) {
