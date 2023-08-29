@@ -5,6 +5,8 @@ import { CreateUserHttpController } from './commands/create-user/create-user.htt
 import { CreateUserService } from './commands/create-user/create-user.service';
 import { UserMapper } from './user.mapper';
 import { USER_REPOSITORY } from './user.di-tokens';
+import { ClientsModule } from '@nestjs/microservices';
+import { defiRequestOrderRabbitMqClientConfig } from '@src/common/configs/rabbit.mq.configure/rabbit.mq.client.config';
 
 const httpControllers = [CreateUserHttpController];
 
@@ -17,7 +19,17 @@ const repositories: Provider[] = [
 ];
 
 @Module({
-  imports: [CqrsModule],
+  imports: [
+    CqrsModule,
+    ClientsModule.registerAsync([
+      defiRequestOrderRabbitMqClientConfig('_REQ', {
+        noAck: true,
+        queueOptions: {
+          durable: true,
+        },
+      }),
+    ]),
+  ],
   controllers: [...httpControllers],
   providers: [Logger, ...repositories, ...commandHandlers, ...mappers],
 })

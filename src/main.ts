@@ -4,6 +4,7 @@ import { defiSwapRedisServerConfig } from './common/configs/redis.configure/redi
 import { ConfigService } from '@nestjs/config';
 import { loadSecretConfig } from './common/configs/secret.manager.configure/secret.manager.config';
 import { loadSsmConfig } from './common/configs/default.configure/default.config';
+import { defiRequsetOrderRabbitMqServerConfig } from './common/configs/rabbit.mq.configure/rabbit.mq.server.config';
 
 async function bootstrap() {
   /**
@@ -24,7 +25,19 @@ async function bootstrap() {
     retryDelay: 0,
   });
 
+  const requestOrderRabbitMqOptions = defiRequsetOrderRabbitMqServerConfig(
+    configService,
+    '_REQ',
+    {
+      noAck: true,
+      queueOptions: {
+        durable: true,
+      },
+    },
+  );
+
   app.connectMicroservice(redisOptions);
+  app.connectMicroservice(requestOrderRabbitMqOptions);
 
   await app.listen(3000);
 }
