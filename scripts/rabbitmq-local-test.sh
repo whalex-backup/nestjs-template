@@ -1,0 +1,30 @@
+#!/bin/zsh
+
+# Turn on the local rabbitmq
+docker-compose up rabbitmq -d --wait
+
+USERNAME=nestjs-template
+PASSWORD=nestjs-template
+
+# Create exchange
+curl -i -u $USERNAME:$PASSWORD -H "content-type:application/json" \
+    -XPUT -d'{"type":"direct","durable":true}' \
+    http://localhost:15672/api/exchanges/%2F/koo.direct
+
+# Create queue
+curl -i -u $USERNAME:$PASSWORD -H "content-type:application/json" \
+    -XPUT -d'{"auto_delete":"false","durable":true,"arguments":{}}' \
+    http://localhost:15672/api/queues/%2F/koo.queue
+
+# Connect routing key between exchange and queue
+curl -i -u $USERNAME:$PASSWORD -H "content-type:application/json" \
+    -POST -d'{"routing_key":"koo_routing_key", "arguments":{}}' \
+    http://localhost:15672/api/bindings/%2F/e/koo.direct/q/koo.queue
+
+# Get all connected channels
+curl -i -u $USERNAME:$PASSWORD 'http://localhost:15672/api/channels?sort=message_stats.publish_details.rate&sort_reverse=true&columns=name,message_stats.publish_details.rate,message_stats.deliver_get_details.rate'
+
+npx ts-node scripts/rabbitmq-local-test.ts
+
+# Shuting down local rabbitmq
+docker-compose down

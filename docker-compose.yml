@@ -4,6 +4,24 @@ services:
     image: mysql
     command: --default-authentication-plugin=mysql_native_password
     restart: always
+    ports:
+      - 3306:3306
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: defi
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: rabbitmq-stream
+    ports:
+      - 5672:5672
+      - 15672:15672
+    environment:
+      RABBITMQ_ERLANG_COOKIE: "RabbitMQ-My-Cookies"
+      RABBITMQ_DEFAULT_USER: "nestjs-template"
+      RABBITMQ_DEFAULT_PASS: "nestjs-template"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:15672"]
+      interval: 5s
+      timeout: 10s
+      retries: 5
+      start_period: 10s
