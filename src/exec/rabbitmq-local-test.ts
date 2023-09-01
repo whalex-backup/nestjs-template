@@ -1,9 +1,12 @@
-import { log } from './script-util';
+import { log } from '../common/utils';
 import * as amqplib from 'amqplib';
 import * as readline from 'readline';
 
-const exchangeName = 'koo.direct'
-const routingKey = 'koo_routing_key'
+const STRESS_TEST = process.env.STRESS || 'false';
+const STRESS_TEST_INTERVAL_MS = 100;
+
+const exchangeName = 'koo.direct';
+const routingKey = 'koo_routing_key';
 const queueName1 = 'koo.queue.1';
 const queueName2 = 'koo.queue.2';
 
@@ -94,9 +97,15 @@ const main = async () => {
   sendMessage(await connection.createChannel());
 
   // for stress testing
-  // setInterval(() => {
-  //   channel.publish(exchangeName, routingKey,Buffer.from('queue aliving...'))
-  // }, 100)
+  if (STRESS_TEST === 'true') {
+    setInterval(() => {
+      channel.publish(
+        exchangeName,
+        routingKey,
+        Buffer.from('queue aliving...'),
+      );
+    }, STRESS_TEST_INTERVAL_MS);
+  }
 };
 
 main().then();

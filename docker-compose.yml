@@ -7,8 +7,8 @@ services:
     ports:
       - 3306:3306
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: defi
+      MYSQL_ROOT_PASSWORD: nestjs-template
+      MYSQL_DATABASE: nestjs-template
   rabbitmq:
     image: rabbitmq:3-management-alpine
     container_name: rabbitmq-stream
@@ -16,11 +16,11 @@ services:
       - 5672:5672
       - 15672:15672
     environment:
-      RABBITMQ_ERLANG_COOKIE: "RabbitMQ-My-Cookies"
-      RABBITMQ_DEFAULT_USER: "nestjs-template"
-      RABBITMQ_DEFAULT_PASS: "nestjs-template"
+      RABBITMQ_ERLANG_COOKIE: 'RabbitMQ-My-Cookies'
+      RABBITMQ_DEFAULT_USER: 'nestjs-template'
+      RABBITMQ_DEFAULT_PASS: 'nestjs-template'
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:15672"]
+      test: ['CMD', 'curl', '-f', 'http://localhost:15672']
       interval: 5s
       timeout: 10s
       retries: 5
