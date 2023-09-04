@@ -19,8 +19,9 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "test:rabbitmq": "sh scripts/rabbitmq-local-test.sh",
-    "compile:load": "tsc -p scripts/k6-load-test-tsconfig.json",
-    "test:load": "yarn compile:load; docker-compose run k6 run /scripts/k6-load-test.js"
+    "compile:load": "tsc -p scripts/tsconfig.json",
+    "test:load": "yarn compile:load; docker-compose run k6 run /scripts/k6-load-test.js",
+    "test:load-mq": "yarn compile:load; docker-compose run k6 run /scripts/k6-load-test-amqp.js"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.142.0",

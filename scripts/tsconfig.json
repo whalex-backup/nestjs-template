@@ -18,5 +18,10 @@
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false
   },
-  "include": ["../scripts/*.ts"]
+  "include": [
+    "../scripts/*.ts"
+  ],
+  "files": [
+    "k6-load-test.d.ts"
+  ]
 }

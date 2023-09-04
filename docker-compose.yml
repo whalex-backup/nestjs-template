@@ -53,7 +53,7 @@ services:
       - "./scripts/k6-load-test-dashboard.yaml:/etc/grafana/provisioning/dashboards/dashboard.yaml"
       - "./scripts/k6-load-test-datasource.yaml:/etc/grafana/provisioning/datasources/datasource.yaml"
   k6:
-    image: grafana/k6:latest
+    image: cudr12/k6-amqp:latest
     networks:
       - k6
       - host
