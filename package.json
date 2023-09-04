@@ -18,7 +18,9 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "test:rabbitmq": "sh scripts/rabbitmq-local-test.sh"
+    "test:rabbitmq": "sh scripts/rabbitmq-local-test.sh",
+    "compile:load": "tsc -p scripts/k6-load-test-tsconfig.json",
+    "test:load": "yarn compile:load; docker-compose run k6 run /scripts/k6-load-test.js"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.142.0",
@@ -71,6 +73,7 @@
     "@types/cron": "^2.0.0",
     "@types/express": "^4.17.13",
     "@types/jest": "28.1.4",
+    "@types/k6": "^0.46.2",
     "@types/mocha": "^9.1.1",
     "@types/node": "^16.0.0",
     "@types/request": "^2.48.8",

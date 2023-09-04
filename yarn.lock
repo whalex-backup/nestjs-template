@@ -2556,6 +2556,11 @@
   resolved "https://registry.yarnpkg.com/@types/json5/-/json5-0.0.29.tgz#ee28707ae94e11d2b827bcbe5270bcea7f3e71ee"
   integrity sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==
 
+"@types/k6@^0.46.2":
+  version "0.46.2"
+  resolved "https://registry.yarnpkg.com/@types/k6/-/k6-0.46.2.tgz#5b27de2aba666f0bbdc37f8812a64b2a9deb1535"
+  integrity sha512-T1LU04YzrmcsTVOtFFL0wn0TPzvX08XNbmUJAIziR0J+4HO3IwN4t/X20y16+qZY7Aac141lYWje6QIIrbmmKg==
+
 "@types/luxon@~3.3.0":
   version "3.3.1"
   resolved "https://registry.yarnpkg.com/@types/luxon/-/luxon-3.3.1.tgz#08727da7d81ee6a6c702b9dc6c8f86be010eb4dc"

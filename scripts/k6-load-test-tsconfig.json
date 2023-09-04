@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
+    "module": "es2020",
     "declaration": true,
     "removeComments": true,
     "emitDecoratorMetadata": true,
@@ -8,22 +8,15 @@
     "allowSyntheticDefaultImports": true,
     "target": "es2020",
     "sourceMap": true,
-    "outDir": "./dist",
-    "baseUrl": "./",
+    "outDir": "../dist/scripts",
+    "baseUrl": "../",
     "incremental": true,
     "skipLibCheck": true,
     "strictNullChecks": false,
     "noImplicitAny": false,
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
-    "noFallthroughCasesInSwitch": false,
-    "paths": {
-      "@src/*": ["src/*"],
-      "@common/*": ["src/common/*"],
-      "@modules/*": ["src/modules/*"],
-      "@tests/*": ["tests/*"]
-    }
+    "noFallthroughCasesInSwitch": false
   },
-  "include": ["**/*.ts", "**/*.spec.ts"],
-  "exclude": ["node_modules", "dist", "tmp"],
+  "include": ["../scripts/*.ts"]
 }

@@ -36,7 +36,7 @@ curl -i -u $USERNAME:$PASSWORD -H "content-type:application/json" \
 # Get all connected channels
 curl -i -u $USERNAME:$PASSWORD 'http://localhost:15672/api/channels?sort=message_stats.publish_details.rate&sort_reverse=true&columns=name,message_stats.publish_details.rate,message_stats.deliver_get_details.rate'
 
-node dist/src/exec/rabbitmq-local-test.js
+node dist/scripts/rabbitmq-local-test.js
 
 # Shuting down local rabbitmq
 # $ scripts

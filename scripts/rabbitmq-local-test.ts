@@ -1,4 +1,4 @@
-import { log } from '../common/utils';
+import { log } from './script.utils';
 import * as amqplib from 'amqplib';
 import * as readline from 'readline';
 
