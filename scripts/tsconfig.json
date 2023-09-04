@@ -22,6 +22,6 @@
     "../scripts/*.ts"
   ],
   "files": [
-    "k6-load-test.d.ts"
+    "k6-x-amqp.d.ts"
   ]
 }

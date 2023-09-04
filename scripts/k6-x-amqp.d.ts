@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
 declare module 'k6/x/amqp' {
   export default class Amqp {
     static start(params: { connection_url: string }) {}
@@ -10,7 +13,7 @@ declare module 'k6/x/amqp' {
       mandatory?: boolean = false;
       immediate?: boolean = false;
       headers?: Record<string, string>;
-    });
+    }) {}
     static listen(params: {
       queue_name: string;
       listener: (data: any) => void;
@@ -20,7 +23,7 @@ declare module 'k6/x/amqp' {
       no_local?: boolean = false;
       no_wait?: boolean = false;
       args?: any | null = null;
-    });
+    }) {}
   }
 }
 
@@ -33,6 +36,6 @@ declare module 'k6/x/amqp/queue' {
       exclusive?: boolean = false;
       no_wait?: boolean = false;
       args?: any | null = null;
-    });
+    }) {}
   }
 }
